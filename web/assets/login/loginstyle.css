@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body,html,.wrapcon{
+    width: 100%;
+    height: 100%;
+}
+.bagimg{
+    width: 100%;
+    height: 100%;
+    background: url("/assets/login/images/bag.png");
+    background-size: 100% 100%;
+}
+.bagimg .content{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 1200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.layui-carousel{
+    height: 550px !important;
+    background: transparent;
+}
+.layui-carousel[lay-indicator=outside] .layui-carousel-ind ul,
+.layui-carousel-ind ul,
+.layui-carousel>[carousel-item]>*{
+    background: transparent;
+}
+.layui-carousel-ind li{
+    width: 30px;
+    height: 3px;
+    border-radius: 3px;
+}
+.login_con{
+    width: 340px;
+    height: 500px;
+    background: #fff;
+    text-align: center;
+}
+.login_con >img{
+    width: 120px;
+    margin-top: 60px;
+}
+.login_con .desc{
+    color: #323232;
+    margin-top: 10px;
+}
+.loginForm{
+    width: 300px;
+    margin: 49px auto 0;
+}
+.loginForm .form_every{
+    overflow: hidden;
+    height: 50px;
+    border: 1px solid #eee;
+    margin-top: 19px;
+}
+.loginForm .form_every img{
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 15px 10px;
+}
+.loginForm .form_every input{
+    float: left;
+    font-size: 14px;
+    border: none;
+    width: calc(100% - 40px);
+    line-height: 50px;
+}
+.loginForm .form_every input::placeholder{
+    color: #8D8D8D;
+}
+.submit{
+    width: 300px;
+    height: 49px;
+    background-color: #f1cca7;
+    margin: 0 auto;
+    color: #fff;
+    line-height: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 70px;
+    border: aliceblue;
+    font-size: 19px;
+    text-shadow: 2px 2px 1px rgb(0 0 0 / 20%);
+    box-shadow: 2px 4px 1px #d8b79a;
+    transition: border .2s linear, color .2s linear, width .2s linear, background-color .2s linear;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+.footer{
+    position: fixed;
+    bottom: 4%;
+    width: 100%;
+}
+.footer div{
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+.footer div:last-of-type{
+    font-size: 12px;
+    margin-top: 4px;
+}
+.code {
+    overflow: hidden;
+    height: 50px;
+    margin-top: 19px;
+}
+
+.layui-bg-red_blue{
+    background-color: #f1cca7!important
+}
+.footer .ying-records {
+    margin: 15px 0 0;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+.footer .dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: 3px 5px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}

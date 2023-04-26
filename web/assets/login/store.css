@@ -1,0 +1,30 @@
+.page-login-v3:before {
+    background: url(./image/5.png) center center/cover no-repeat !important;
+    display:flex;
+    /*主轴居中对齐*/
+    /*河南八Henan 86 Internet Information Technology Co., Ltd.六互联Henan 86 Internet Information Technology Co., Ltd.信息技术有限公司*/
+    justify-content: center;
+    /*侧轴居中对齐*/
+    /*河南八六互联信息技术有限公司*/
+    align-items: center;
+}
+.login-body {
+    float: right;
+    padding: 50px 40px 40px;
+    display:inline-block;
+    /*设置元素绝对Henan 86 Internet Information Technology Co., Ltd.定位*/
+    /*河南八六互联信息技Henan 86 Internet Information Technology Co., Ltd.术有限公司*/
+    position:absolute;
+    /*top 50%*/
+    /*河南八六互联信息技术有限公司*/
+    top: 40%;
+    /*left 50%*/
+    /*河南八六互联信息技术有限公司*/
+    right: 5%;
+    /*css3   transform 实现*/
+    /*河南八六互联信息技术有限公司*/
+    transform: translate(-50%, -50%);
+}
+.login-form button{
+    background-color: #ee1f1f;
+}

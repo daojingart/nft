@@ -1,0 +1,56 @@
+{
+  "name": "topthink/think",
+  "description": "the new thinkphp framework",
+  "type": "project",
+  "keywords": [
+    "framework",
+    "thinkphp",
+    "ORM"
+  ],
+  "homepage": "http://thinkphp.cn/",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "liu21st",
+      "email": "liu21st@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4.0",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-bcmath": "*",
+    "topthink/framework": "5.0.*",
+    "firebase/php-jwt": "^5.2",
+    "php-amqplib/php-amqplib": "^3.0",
+    "tencentcloud/tencentcloud-sdk-php": "^3.0",
+    "workerman/gateway-worker": "^3.0",
+    "yurunsoft/pay-sdk": "~2.0",
+    "baliu/nft-ide-helper": "^1.0",
+    "topthink/think-queue": "1.1.6",
+    "johnlui/aliyun-oss": "~2.0",
+    "yansongda/pay": "~3.2.0",
+    "php-di/php-di": "^6.4",
+    "baliu/bl-ide-helper": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app"
+    }
+  },
+  "extra": {
+    "think-path": "thinkphp"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "allow-plugins": {
+      "topthink/think-installer": true
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.s.86itn.cn/"
+    }
+  ]
+}

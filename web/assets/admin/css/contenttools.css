@@ -1,0 +1,98 @@
+.widget-head {
+    width: 100%;
+    padding: 25px 20px;
+    border-bottom: 1px solid #eef1f5;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.widget-head .widget-title {
+    position: relative;
+    font-size: 18px;
+}
+.am-fl {
+    float: left;
+}
+.widget-head .widget-title::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 14px;
+    background: #209ffe;
+    top: 6px;
+    left: -12px;
+}
+.layui-card {
+    margin-bottom: 15px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: none;
+}
+.top-panel .plugins-toolslist-item{
+    position: relative;
+    cursor: pointer;
+    min-width: 302px;
+    height: 72px;
+    background: #f3f5f7;
+    border-radius: 8px;
+    float: left;
+    margin: 12px;
+}
+.top-panel .plugins-toolslist-item .__icon{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 16px;
+    top: 16px;
+}
+.top-panel .plugins-toolslist-item .__info{
+    position: absolute;
+    left: 68px;
+    top: 16px;
+    height: 60px;
+}
+.top-panel .plugins-toolslist-item .__info h3{
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #262626;
+    margin: 0;
+}
+.top-panel .plugins-toolslist-item .__info p{
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8c8c8c;
+    margin: 0;
+}
+.top-panel .plugins-toolslist-item .__btn{
+    position: absolute;
+    width: 40px;
+    height: 28px;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 28px;
+    right: 10px;
+    top: 25px;
+    display: block;
+}
+
+@media screen and (min-width: 992px){
+    .layui-col-md4 {
+        width: 33.33333333%;
+    }
+}
+@media screen and (min-width:1300px){
+    .layui-col-md4 {
+        width: 33.33333333%;
+    }
+}
+@media screen and (min-width:1600px){
+    .layui-col-md4 {
+        width: 24.33%;
+    }
+}
+

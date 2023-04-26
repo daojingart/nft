@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>网络网页</title>
+		<style type="text/css">
+			.btn {
+				display: block;
+				margin: 20px auto;
+				padding: 5px;
+				background-color: #007aff;
+				border: 0;
+				color: #ffffff;
+				height: 40px;
+				width: 200px;
+			}
+
+			.btn-red {
+				background-color: #dd524d;
+			}
+
+			.btn-yellow {
+				background-color: #f0ad4e;
+			}
+
+			.desc {
+				padding: 10px;
+				color: #999999;
+			}
+
+			.post-message-section {
+				visibility: hidden;
+			}
+		</style>
+		<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script src="https://mpay-static.oss-cn-hangzhou.aliyuncs.com/lib/accp-password/v1.0.0.js"></script>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var token = '';
+			var passwordScene = '';
+			var flagChnl = '';
+			var amount = '';
+			var txn_seqno = '';
+			var password_lianlian = '';
+			var randomKey = '';
+			var Pid = '';
+			var userAgent = navigator.userAgent;
+			if (userAgent.indexOf('AlipayClient') > -1) {
+				// 支付宝小程序的 JS-SDK 防止 404 需要动态加载，如果不需要兼容支付宝小程序，则无需引用此 JS 文件。
+				document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>');
+			} else if (/QQ/i.test(userAgent) && /miniProgram/i.test(userAgent)) {
+				// QQ 小程序
+				document.write(
+					'<script type="text/javascript" src="https://qqq.gtimg.cn/miniprogram/webview_jssdk/qqjssdk-1.0.0.js"><\/script>'
+				);
+			} else if (/miniProgram/i.test(userAgent) && /micromessenger/i.test(userAgent)) {
+				// 微信小程序 JS-SDK 如果不需要兼容微信小程序，则无需引用此 JS 文件。
+				document.write('<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"><\/script>');
+			} else if (/toutiaomicroapp/i.test(userAgent)) {
+				// 头条小程序 JS-SDK 如果不需要兼容头条小程序，则无需引用此 JS 文件。
+				document.write(
+					'<script type="text/javascript" src="https://s3.pstatp.com/toutiao/tmajssdk/jssdk-1.0.1.js"><\/script>');
+			} else if (/swan/i.test(userAgent)) {
+				// 百度小程序 JS-SDK 如果不需要兼容百度小程序，则无需引用此 JS 文件。
+				document.write(
+					'<script type="text/javascript" src="https://b.bdstatic.com/searchbox/icms/searchbox/js/swan-2.0.18.js"><\/script>'
+				);
+			} else if (/quickapp/i.test(userAgent)) {
+				// quickapp
+				document.write('<script type="text/javascript" src="https://quickapp/jssdk.webview.min.js"><\/script>');
+			}
+			if (!/toutiaomicroapp/i.test(userAgent)) {
+				// document.querySelector('.post-message-section').style.visibility = 'visible';
+			}
+		</script>
+		<!-- uni 的 SDK -->
+		<!-- 需要把 uni.webview.1.5.4.js 下载到自己的服务器 -->
+		<script type="text/javascript" src="https://unpkg.com/@dcloudio/uni-webview-js@0.0.3/index.js"></script>
+		<script type="text/javascript">
+			// 待触发 `UniAppJSBridgeReady` 事件后，即可调用 uni 的 API。
+			document.addEventListener('UniAppJSBridgeReady', function() {
+				uni.postMessage({
+					data: {
+						action: 'message'
+					}
+				});
+				uni.getEnv(function(res) {
+					// console.log('当前：' + JSON.stringify(res));
+					// console.log(1111);
+				});
+
+				// document.querySelector('.btn-list').addEventListener('click', function(evt) {
+				// 	var target = evt.target;
+				// 	if (target.tagName === 'BUTTON') {
+				// 		var action = target.getAttribute('data-action');
+				// 		switch (action) {
+				// 			case 'switchTab':
+				// 				console.log(111)
+				// 				uni.switchTab({
+				// 					url: '/pages/main/index'
+				// 				});
+				// 				break;
+				// 			case 'reLaunch':
+				// 				console.log(111)
+				// 				uni.reLaunch({
+				// 					url: '/pages/main/index'
+				// 				});
+				// 				break;
+				// 			case 'navigateBack':
+
+				// 				uni.navigateBack();
+				// 				break;
+				// 			default:
+				// 				uni[action]({
+				// 					url: '/pages/component/button/button'
+				// 				});
+				// 				break;
+				// 		}
+				// 	}
+				// });
+				// document.getElementById('postMessage').addEventListener('click', function() {
+				// 	uni.postMessage({
+				// 		data: {
+				// 			action: 'message'
+				// 		}
+				// 	});
+				// });
+			});
+			// 定义回调函数
+			function callback(res) {
+				// 第一个参数传入回调结果，结果如下：
+				// ret         Int       验证结果，0：验证成功。2：用户主动关闭验证码。
+				// ticket      String    验证成功的票据，当且仅当 ret = 0 时 ticket 有值。
+				// CaptchaAppId       String    验证码应用ID。
+				// bizState    Any       自定义透传参数。
+				// randstr     String    本次验证的随机串，后续票据校验时需传递该参数。
+				console.log('callback:', res);
+				// res（用户主动关闭验证码）= {ret: 2, ticket: null}
+				// res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
+				// res（请求验证码发生错误，验证码自动返回terror_前缀的容灾票据） = {ret: 0, ticket: "String", randstr: "String",  errorCode: Number, errorMessage: "String"}
+				// 此处代码仅为验证结果的展示示例，真实业务接入，建议基于ticket和errorCode情况做不同的业务处理
+				if (res.ret === 0) {
+					// 复制结果至剪切板
+					var str = '【randstr】->【' + res.randstr + '】      【ticket】->【' + res.ticket + '】';
+					var ipt = document.createElement('input');
+					ipt.value = str;
+					document.body.appendChild(ipt);
+					ipt.select();
+					document.execCommand("Copy");
+					document.body.removeChild(ipt);
+					console.log(token)
+					// alert('1. 返回结果（randstr、ticket）已复制到剪切板，ctrl+v 查看。\n2. 打开浏览器控制台，查看完整返回结果。');
+					$.ajax({
+						url: "https://yysmeta.net/index/sessionStrong", //请求的url地址
+						dataType: "json", //返回格式为json
+						async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+						headers: {
+							token: token
+						},
+						data: {
+							"ticket": res.ticket,
+							"randstr": res.randstr,
+							"token":token
+						}, //参数值
+						type: "POST", //请求方式
+						beforeSend: function() {
+							//请求前的处理
+						},
+						success: function(req) {
+							//请求成功时处理
+							uni.navigateBack();
+						},
+						complete: function() {
+						 //请求完成的处理
+						},
+						error: function() {
+							//请求出错处理
+						}
+					});
+					// uni.navigateBack();
+					// if(confirm("还有继续吗？")){  
+					//    uni.navigateBack();
+					// }else{  
+					//     alert("再见");  
+					// }  
+
+				}
+				if(res.ret===2){
+					uni.navigateBack();
+				}
+			}
+
+			// 定义验证码js加载错误处理函数
+			function loadErrorCallback() {
+				var appid = ''
+				// 生成容灾票据或自行做其它处理
+				var ticket = 'terror_1001_' + appid + Math.floor(new Date().getTime() / 1000);
+				callback({
+					ret: 0,
+					randstr: '@' + Math.random().toString(36).substr(2),
+					ticket,
+					errorCode: 1001,
+					errorMessage: 'jsload_error',
+				});
+			}
+
+			// 定义验证码触发事件
+			window.onload = function() {
+				console.log(window.location.href)
+					token = window.location.href.split('?token=')[1]
+					token = token.split('&passwordScene=')[0]
+					if(window.location.href.split('&passwordScene=')[1]!=''){
+						passwordScene = window.location.href.split('&passwordScene=')[1]
+						passwordScene = passwordScene.split('&flagChnl=')[0]
+					}
+					if(window.location.href.split('&passwordScene=')[1]!=''){
+						flagChnl = window.location.href.split('&flagChnl=')[1]
+						flagChnl = flagChnl.split('&amount=')[0]
+					}
+					if(window.location.href.split('&amount=')[1]!=''){
+						amount = window.location.href.split('&amount=')[1]
+						amount = amount.split('&txn_seqno=')[0]
+					}
+					if(window.location.href.split('&txn_seqno=')[1]!=''){
+						txn_seqno = window.location.href.split('&txn_seqno=')[1]
+					}
+					 console.log(token)
+					 console.log(flagChnl)
+					 console.log(amount)
+					 console.log(txn_seqno)
+					 $.ajax({
+					 	url: "https://nftdemo.86itn.cn/wallet/getApplyPasswordElement", //请求的url地址
+					 	dataType: "json", //返回格式为json
+					 	async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+					 	headers: {
+					 		token: token
+					 	},
+					 	data: {
+					 		"passwordScene": passwordScene,
+					 		"flagChnl": 'H5',
+					 		"amount":amount,
+							"txn_seqno":txn_seqno,
+							"pkg_name":"com.nft.com",
+							"app_name":"八六数藏"
+					 	}, //参数值
+					 	type: "POST", //请求方式
+					 	beforeSend: function() {
+					 		//请求前的处理
+					 	},
+					 	success: function(req) {
+							console.log('成功'+req.code)
+							console.log('成功'+req.msg)
+							console.log('成功'+req.data.oidPartner)
+							console.log('成功'+req.data.userId)
+							lianlianpay.invokePasswordControl({
+							        passwordScene: passwordScene,
+							        oidPartner: req.data.oidPartner, // 商户号
+							        userId: req.data.userId, // 用户号
+							        passwordElementToken: req.data.passwordElementToken, // 向服务端请求生成的 token
+							        styles: { // 样式集合
+							          themeColor: '#0E59F0', // 主题颜色（按钮等）
+							        }
+							      }, (res) => {
+									password_lianlian = res.data.password
+									randomKey = res.data.randomKey
+									console.log('密码数据', password_lianlian)
+									console.log('密码数据', randomKey)
+									$.ajax({
+										url: "https://nftdemo.86itn.cn/index/sessionStronglLPay", //请求的url地址
+										dataType: "json", //返回格式为json
+										async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+										headers: {
+											token: token
+										},
+										data: {
+											"password_lianlian": password_lianlian,
+											"randomKey": randomKey,
+											"token":token
+										}, //参数值
+										type: "POST", //请求方式
+										beforeSend: function() {
+											//请求前的处理
+										},
+										success: function(req) {
+											//请求成功时处理
+											uni.navigateBack();
+										},
+										complete: function() {
+										 //请求完成的处理
+										},
+										error: function() {
+											//请求出错处理
+										}
+									});
+									// uni.navigateBack();
+							      }) 
+					 		//请求成功时处理
+					 		//uni.navigateBack();
+					 	},
+					 	complete: function(cc) {
+					 	 //请求完成的处理
+					 	},
+					 	error: function(cc) {
+					 		//请求出错处理
+					 	}
+					 });
+				
+			}
+		</script>
+	</body>
+</html>

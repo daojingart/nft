@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>八六数藏APP下载</title>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.3/weui.min.css">
+    <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+    <link rel="stylesheet" href="https://static.7192.com/css/reset.css">
+    <style>
+        .big_img {
+            position: relative;
+        }
+        .big_img img {
+            width: 100%;
+            display: block;
+        }
+        .down_btn {
+            width: 200px;
+            height: 50px;
+            background-color: #46403a;
+            border-radius: 25px;
+            color: #fff;
+            margin: 20px auto;
+
+        }
+        .b_txt {
+        padding: 20px 0 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 300;
+        color: #666;
+        }
+        .line_b {
+        width: 60px;
+        height: 2px;
+        background-color: #ddd;
+        margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="big_img">
+        <img src="https://teammalloss.86itn.cn/app.png" alt="">
+        <a href="javascript:download()" class="down_btn flex_center">立即下载APP</a>
+        <div class="b_txt">
+            <div class="line_b"></div>
+            <div>正规公司 · 技术保障</div>
+            <div class="line_b"></div>
+        </div>
+    </div>
+    <script>
+        function download() {
+            //判断手机系统
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                weui.alert('点击右上角在默认浏览器中打开');
+            } else {
+                if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+                    weui.alert('IOS暂未上架');
+                    // window.location.href = '';
+                } else {
+                window.location.href = "https://teammalloss.86itn.cn/app.apk";
+                }
+            }
+            
+        }
+    </script>
+</body>
+</html>

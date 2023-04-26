@@ -1,0 +1,18 @@
+{
+    "name": "baliu/bl-ide-helper",
+    "type": "library",
+    "description": "BL帮助包",
+    "keywords": ["bl"],
+    "homepage": "http://git.s.86itn.cn/composer/bl-ide-helper.git",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "xzz",
+            "email": "867342143@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0"
+    }
+}

@@ -1,0 +1,182 @@
+{
+     "code": 1,
+     "data": [
+          {
+               "upgrade_vision": "3.0.2",
+               "content": "<p>+ 增加首页中部广告位隐藏开关</p><p>+ 增加底部按钮自定义设置</p><p>+ 适配文昌链V2API</p><p>+ 优化二级市场显示</p><p>+ 优化注销功能</p><p>+ 新增三要素认证</p><p>+ 优化修复若干问题</p><p>+ 新增三方大盘API</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-04-23 09:30:00"
+          },
+          {
+               "upgrade_vision": "3.0.1",
+               "content": "<p>+ 优化开放元数网数据对接API</p><p>+ 优化二级市场请求</p><p>+ 新增金刚区导航自定义</p><p>+ 新增藏品抽奖活动</p><p>+ 新增合成白名单</p><p>+ 新增杉德后台自定义开启是否收取开户费</p><p>+ 增加二级交易市场退市功能</p><p>+ 增加个人中心图标显示隐藏自定义</p><p>+ 排行榜支持隐藏显示</p><p>+ 官方回收支持隐藏开启</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-04-17 09:30:00"
+          },
+          {
+               "upgrade_vision": "3.0.0",
+               "content": "<p>+ UI重构更新</p><p>+ API接口请求更新</p><p>+ 更新授权验证版本</p><p>+ 增加内置防火墙</p><p>+ 优化空投订单掉单</p><p>+ 增加实物商城</p><p>+ 已知问题修改</p><p>+ 更新开放元数网数据对接API</p><p>+ 增加后台交易市场锁定，解锁功能</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-02-23 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.9",
+               "content": "<p>+ 优化后台图片存储</p><p>+ 修复若干BUG</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-02-17 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.8",
+               "content": "<p>+ 优化连连支付增加实名认证上传接口参数</p><p>+ 修复若干问题</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-02-10 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.7",
+               "content": "<p>+ 修复授权验证逻辑</p><p>+ 优化接口请求</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-02-5 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.6",
+               "content": "<p>+ 优化杉德支付逻辑</p><p>+ 修复若干其他问题</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-01-25 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.5",
+               "content": "<p>+ 修复实名认证四元素认证接口返回错误</p><p>+ 优化一些体验</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-01-20 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.4",
+               "content": "<p>+ 更新优化一些BUG</p><p>+ 优化接口若干数据</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-01-15 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.3",
+               "content": "<p>+ 汇付通支付增加开户费收取\n</p><p>+ 天河链上链优化</p><p>+ 增加消费排行榜统计</p><p>+ 增加根据持有量叠加空投方式</p><p>+ 积分商城增加兑换门槛,支持设置持有某个藏品可以兑换的权益</p><p>+ 荣誉值兑换藏品,支持设置持有某个藏品可以兑换的权益</p><p>+ 新增公告分类，支持设置多个分类发布公告</p><p>+ 增加合成新玩法,合成结果支持随机合成某个藏品碎片</p><p>+ 二级市场展示形式优化</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2023-01-09 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.2",
+               "content": "<p>+ 优先购规则调整,系统自动按照优先购购买次数进行排序\n</p><p>+ 会员注册页面显示优化，邀请码增加选填功能</p><p>+ 增加开发部署文档</p><p>+ 支持单个藏品设置市场限制价格</p><p>+ 后台支持对藏品批量下架</p><p>+ 优化系统内部逻辑调整</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-12-09 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.1",
+               "content": "<p>+ 优先购买规则优化,支持根据标签设置提前购买时间和额外购买次数\n</p><p>+ 增加对接易宝支付通道</p><p>+ 优化杉德支付通道</p><p>+ 支持标签会员导入添加会员名单</p><p>+ 优化连连支付通道</p><p>+ 增加汇付通钱包支付通道</p><p>+ 优化持仓排行榜显示</p><p>+ 优化市场需求展示UI</p><p>+  APP优化样式兼容性调整</p><p>+  后台增加会员盲盒管理</p><p>+  增加盲盒交易市场管理</p><p>+ 优化后台会员管理；查看下级会员列表 </p><p>+  寄售订单搜索优化</p><p>+  修复优化系统已知问题</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-10-30 09:30:00"
+          },
+          {
+               "upgrade_vision": "2.0.0",
+               "content": "<p>+ 增加后端持仓排行榜展示、持仓排行支持导出</p><p>+ 增加后端邀请排行榜展示、支持导出</p><p>+ 增加后端版权上面文字显示后台自定义文字</p><p>+ 新增连连快捷支付通道</p><p>+ 新增内测模式;内测模式下仅支持后台导入的内侧会员登录自己前端注册的会员提示内测中不可登录</p><p>+ 优化转增UI页面，增加赠送人、接收人信息、显示转增的藏品编号</p><p>+ 新增寄售弹出确认框 点击确认方可寄售成功</p><p>+ 新增A钱包(系统钱包)操作密码设置 余额购买、寄售、转增操作需要输入密码方可操作成功</p><p>+   我的藏品页面优化，支持折叠展示，点击详情进入查看全部藏品 显示藏品编号</p><p>+  新增后台支持 编辑会员信息</p><p>+  寄售交易市场UI优化 增加详情页面 展示本藏品的所有寄售编号方便快捷用户购买</p><p>+  优化优先购、增加按照持有藏品设定优先购买规则，按照持有藏品设置可以提前多少购买本藏品、以及购买多少个 </p><p>+  优化排行榜上榜规则 增加开关、支持选择实名认证 有效上榜、或者下单购买上榜</p><p>+  增加汇元银通钱包支付通道、快捷支付通道</p><p>+  优化申购流程、用户体验</p><p>+  增加汇元银通钱包支付通道、快捷支付通道</p><p>+  增加空投藏品扣除库存</p><p>+  优化空投逻辑 增加按照用户持有藏品设定规则 进行筛选空投</p><p>+  优化腾域短信发送模板内容</p><p>+  优化邀请海报扫码链接 直接到注册页面 注册用户</p><p>+  新增APP下载发行页面</p><p>+  新增实名认证要素选择 支持腾讯云二要素验证、四要素验证自主选择</p><p>+  新增盲盒开启寄售市场发行功能支持盲盒寄售</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-09-06 09:30:00"
+          },
+          {
+               "upgrade_vision": "1.0.9",
+               "content": "<p>+ 增加UI白色主题、后台可进行一键切换</p><p>+ 增加天河链区块链通道</p><p>+ 优化的我的藏品UI增加折叠UI</p><p>+ 增加三方汇付银联支付通道</p><p>+ 增加针对单个藏品设置是否允许寄售、转增</p><p>+ 增加针对单个藏品设置寄售、转增冻结时间</p><p>+ 增加支持导出持有藏品的会员信息</p><p>+ 盲盒功能优化增加随机盲盒算法</p><p>+   盲盒功能优化增加盲盒概率算法加库存限制</p><p>+  提现功能优化增加提现设置最低提现金额</p><p>+  藏品功能优化增加藏品支持是否开启关闭底座展示</p><p>+  后台增加开放API接口</p><p>+  盲盒功能优化增加盲盒优先购功能</p><p>+  标签功能优化增加支持按照持有藏品对会员进行自动化打标签</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-08-15 09:30:00"
+          },
+          {
+               "upgrade_vision": "1.0.8",
+               "content": "<p>+ 前端登录页面LOGO 支持自定义修改</p><p>+ 优化首页体验、首页增加下拉刷新</p><p>+ 增加荣誉值实物商城</p><p>+ 优化钱包模块,增加连连钱包支付、支持钱包提现充值</p><p>+ 增加杉德快捷支付通道</p><p>+ 优化荣誉值兑换并发问题</p><p>+ 增加excel表格导入空投</p><p>+ 优化APP3D展示</p><p>+  优化合成功能</p><p>+  优化首页展示发行限量字段展示</p><p>+  优化空投可以选择发售的藏品以及盲盒里面的藏品</p><p>+  优化后台筛选BUG</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-08-05 09:30:15"
+          },
+          {
+               "upgrade_vision": "1.0.7",
+               "content": "<p>+ 排行榜增加月榜、周榜、总榜</p><p>+ 增加邀请会员下单后算有效会员</p><p>+ 优化合成增加空投、盲盒产品内的碎片合成</p><p>+ 增加标签内会员管理</p><p>+ 优化合成增加合成概率</p><p>+ 优化教会市场显示编号功能</p><p>+ 增加支持3D展示，glb格式</p><p>+ 增加通告复制链接功能</p><p>+  优化海报生成加载速度优化</p><p>+  优化首页展示发行量功能</p><p>+  增加交易市场寄售价格百分比功能</p><p>+  控制面板统计优化</p><p>+ 增加会员管理根据荣誉值、余额、下级会员数量排序</p><p>+ 增加用户邀请还有赠送额外购买数量</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-07-25 09:30:15"
+          },
+          {
+               "upgrade_vision": "1.0.6",
+               "content": "<p>+ 优化官方回收的功能</p><p>+ 优化前端操作体验</p><p>+ 优化订单取消倒计时</p><p>+ 优化上链流程</p><p>+ 增加行为验证码</p><p>+ 增加系统公告</p><p>+ 增加市场筛选搜索功能</p><p>+ 优化文昌链上链</p><p>+  优化订单号生成算法</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-07-12 09:10:15"
+          },
+          {
+               "upgrade_vision": "1.0.5",
+               "content": "<p>+ 优化后台荣誉值列表显示问题</p><p>+ 优化发售日历列表复选问题</p><p>+ 优化藏品编号生成</p><p>+ 增加轮播图支持超链接问题</p><p>+ 优化H5网站首页标题显示</p><p>+ 增加首页藏品排序问题</p><p>+ 实名认证增加间隔时间</p><p>+ 拉新任务优化</p><p>+  增加个人中心底部支持自定义设置</p><p>+ 优化荣誉值兑换</p><p>+ 优化后台关闭模块后还可以通过连接进入的问题</p><p>+ 优化空投产品模块</p><p>+ 优化前端用户体验</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-07-05 09:10:15"
+          },
+          {
+               "upgrade_vision": "1.0.4",
+               "content": "<p>+ 优化一键售罄功能</p><p>+ 优化前端修改密码验证码登录流程</p><p>+ 优化盲盒列表藏品上链问题</p><p>+ 优化后台会员列表显示用户钱包地址</p><p>+ 优化空投列表展示</p><p>+ 增加藏品列表中显示是否上链标识</p><p>+ 优化后台会员列表显示用户钱包地址</p><p>+ 增加后台空投盲盒功能</p><p>+ 增加用户盲盒管理 可以进行删除操作</p><p>+ 增加空投数量,针对会员可以进行多个数量的空投操作</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-06-30 16:04:15"
+          },
+          {
+               "upgrade_vision": "1.0.3",
+               "content": "<p>+ 后台增加盲盒空投逻辑</p><p>+ 后台增加ico 配置</p><p>+ 增加个人中心钱包地址</p><p>+ 优化藏品显示</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-06-27 17:04:15"
+          },
+          {
+               "upgrade_vision": "1.0.2",
+               "content": "<p>+ 优化盲盒逻辑</p><p>+ 优化后台功能</p><p>+ 处理一些系统BUG</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 10,
+               "upgrade_app_status": 10,
+               "create_time": "2022-06-20 16:49:50"
+          },
+          {
+               "upgrade_vision": "1.0.1",
+               "content": "<p>+ 后台增加藏品一键售罄功能</p><p>+ 优化APP热更新功能</p><p>+ 优化系统性能</p><p>+ 处理一些系统BUG</p>",
+               "upgrade_status": 20,
+               "upgrade_wechat_status": 20,
+               "upgrade_app_status": 20,
+               "create_time": "2022-06-15 16:49:01"
+          }
+     ],
+     "msg": "ok"
+}

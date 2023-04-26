@@ -1,0 +1,59 @@
+.layui-table tbody tr{
+    height: 64px !important;
+    line-height: 64px !important;
+}
+.layui-table tbody tr  td .layui-table-cell {
+    height: 64px !important;
+    line-height: 64px !important;
+}
+.bl-title-box{
+    height: auto!important;
+    position: relative;
+    box-sizing: border-box;
+    overflow: inherit;
+    width: 260px;
+}
+.bl-table-title{
+    display: flex;
+    align-items: center;
+}
+.bl-cover-img {
+    max-width: 100px;
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    -webkit-object-fit: cover;
+    border-radius: 4px;
+}
+.bl-table-title-txt{
+    margin-left: 10px;
+    line-height: 1.3;
+    flex: 1;
+    white-space: pre-line;
+    vertical-align: top;
+    display: flex;
+    flex-direction: column;
+}
+.bl-table-name-title {
+    text-align: left;
+    float: left;
+    color: #353535;
+    width: 100%;
+    height: 42px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+.bl-table-price {
+    font-size: 14px;
+    color: #FF5722;
+    text-align: left;
+}
+.layui-form-checked[lay-skin=primary] i {
+    border-color: #1890ff!important;
+    background-color: #1890ff00;
+}

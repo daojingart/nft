@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/* 多规格 */
+.layui-tab-content {
+    padding: 10px;
+    background: none;
+}
+
+/*layui table 表格样式重载*/
+.layui-table-view .layui-table tr {
+    border: 1px solid #ddd;
+}
+.layui-table-view .layui-table tr td {
+    font-size: 1.3rem;
+    border-right: 1px solid #ddd;
+}
+/*商品详情*/
+.goods-detail-shop {
+    min-width: 350px;
+}
+.goods-detail-shop .goods-info {
+    width: 250px;
+}
+.goods-detail-shop > div {
+    float: left;
+}
+.goods-detail-shop .goods-image {
+    margin-left: 5px;
+}
+.goods-detail-shop .goods-image img {
+    width: 72px;
+    height: 72px;
+}
+.goods-detail-shop .goods-info p {
+    display: block;
+    white-space: normal;
+    margin: 0 0 0.3rem 0;
+    padding: 0 0.5rem;
+    font-size: 1.3rem;
+    text-align: left;
+}
+.goods-detail-shop .goods-info .goods-spec {
+    border: none;
+    font-size: 1.2rem;
+}
+/*商品详情*/
+.am-text-middle {
+    vertical-align: middle!important;
+}
+.layui-table-cell{
+    height: auto !important;
+}
+tbody tr:nth-child(1){
+    display: none;
+    border-top: none;
+}
+tbody tr:nth-child(4){
+    display: none;
+    border-top: none;
+}
+tbody tr:nth-child(7){
+    display: none;
+    border-top: none;
+}
+tbody tr:nth-child(10){
+    display: none;
+    border-top: none;
+}
+tbody tr:nth-child(13){
+    display: none;
+    border-top: none;
+}
+
+.layui-table-body{
+    margin-top: 15px;
+    border-top: 1px #e6e6e6 solid;
+}
+.pay-status-svg svg{
+    margin-bottom: -5px;
+    margin-left: -10px;
+}
+.layui-table-view .layui-table {
+    width: 99.9%;
+}
+.layui-table-cell {
+    line-height: 25px !important;
+}
+.layui-elem-quote {
+    background-color: #eae6e6 !important;
+}
