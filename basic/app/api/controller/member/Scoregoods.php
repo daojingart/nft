@@ -36,7 +36,7 @@ class Scoregoods extends Controller
         $value      = Setting::getItem('drop');
         $glory      = $number * $value['exchange'];
         if ($glory > $this->auth->glory) {
-            $this->error('荣誉值不足');
+            $this->error('贯余额不足');
         }
         //判断今天兑换了几次，后台设置的几次
         $lockKey = "member:setRedeemAirdrops:member_id:{$this->auth->member_id}";

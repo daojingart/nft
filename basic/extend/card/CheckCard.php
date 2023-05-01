@@ -144,6 +144,73 @@ class CheckCard
 		return true;
 	}
 
+    public function threeElementsDemo($param)
+    {
+        // 云市场分配的密钥Id
+        $secretId = $this->config['qf_AppKey'];
+        // 云市场分配的密钥Key
+        $secretKey = $this->config['qf_AppSecret'];
+        $source = 'market';
+        $datetime = gmdate('D, d M Y H:i:s T');
+        $signStr = sprintf("x-date: %s\nx-source: %s", $datetime, $source);
+        $sign = base64_encode(hash_hmac('sha1', $signStr, $secretKey, true));
+        $auth = sprintf('hmac id="%s", algorithm="hmac-sha1", headers="x-date x-source", signature="%s"', $secretId, $sign);
+        // 请求方法
+        $method = 'POST';
+        // 请求头
+        $headers = array(
+            'X-Source' => $source,
+            'X-Date' => $datetime,
+            'Authorization' => $auth,
+        );
+        // 查询参数
+        $queryParams = array (
+        );
+        // body参数（POST方法下）
+        $bodyParams = array (
+            'idCard' => $param['card'],
+            'mobile' => $param['phone'],
+            'realName' => $param['name'],
+        );
+        // url参数拼接
+        $url = 'https://service-4epp7bin-1300755093.ap-beijing.apigateway.myqcloud.com/release/phone3element';
+        if (count($queryParams) > 0) {
+            $url .= '?' . http_build_query($queryParams);
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array_map(function ($v, $k) {
+            return $k . ': ' . $v;
+        }, array_values($headers), array_keys($headers)));
+        if (in_array($method, array('POST', 'PUT', 'PATCH'), true)) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($bodyParams));
+        }
+        $data = curl_exec($ch);
+        if (curl_errno($ch)) {
+            $this->error = curl_error($ch);
+            return false;
+        }
+        curl_close($ch);
+        $content_array = json_decode($data,true);
+        if(empty($content_array)){
+            return '效验失败,未获取到有效信息,请检查配置参数';
+        }
+        if(isset($content_array['error_code']) && $content_array['error_code']!='0'){
+            return $content_array['reason'];
+        }
+        //1-信息匹配，-1-信息不匹配，0-运营商系统中无记录
+        if(isset($content_array['error_code']) && $content_array['error_code']=='0' && $content_array['result']['VerificationResult'] == '-1'){
+            return "核验结果不一致,请您检查输入信息是否为本人信息";
+        }
+        if(isset($content_array['error_code']) && $content_array['error_code']=='0' && $content_array['result']['VerificationResult'] == '0'){
+            return "运营商系统中无记录,请您检查输入信息是否为本人信息";
+        }
+        return 1;
+    }
+
 
 
     /**

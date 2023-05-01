@@ -217,7 +217,7 @@ class OrderValidate extends BaseValidate
                     $this->order_error = "库存不足,无法购买!!!";
                     return false;
                 }
-                if($GloryGoods['type']==1 && $goods_info['product_types']!=1){
+                if($GloryGoods['type']==1 && in_array($goods_info['product_types'], [1,5])){
                     $this->order_error = "请修改参数,类型错误";
                     return false;
                 }

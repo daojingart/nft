@@ -307,7 +307,7 @@ class Index extends Controller
                 'password' => md5($val['password']),
                 'client_type' => 1,
                 'code' => $this->makeCouponCard(),
-                'name' => "藏家_" . getNicknameGuidV4(),
+                'name' => "道友_" . getNicknameGuidV4(),
                 'avatarUrl' => base_url() . '/assets/touxiang.png',
             ];
             if (MemberModel::where('phone', $new_array['phone'])->find()) {
@@ -339,7 +339,7 @@ class Index extends Controller
                 'member_type' => 10,
                 'client_type' => 1,
                 'code' => $this->makeCouponCard(),
-                'name' => "藏家_" . getNicknameGuidV4(),
+                'name' => "道友_" . getNicknameGuidV4(),
                 'avatarUrl' => base_url() . 'assets/touxiang.png',
             ];
             if (MemberModel::where('phone', $new_array['phone'])->find()) {

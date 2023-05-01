@@ -31,7 +31,7 @@ class IntegralPay
             return false;
         }
         if ($glory < $payPrice) {
-            $this->error = "荣誉值不足，兑换失败";
+            $this->error = "贯余额不足，兑换失败";
             return false;
         }
         if(!StockUtils::getStock($params['goods'][0]['goods_id'])){

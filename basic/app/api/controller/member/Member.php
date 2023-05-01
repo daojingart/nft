@@ -44,7 +44,7 @@ use think\Env;
 class Member extends Controller
 {
 	protected $noNeedLogin = [
-		'login','mobilelogin','register','forgotPassword','getIsRealNameAuthentication'
+		'login','mobilelogin','register','forgotPassword','getIsRealNameAuthentication','realAbc'
 	];
 
 	/**
@@ -239,40 +239,43 @@ class Member extends Controller
 	}
 
 
-	/**
-	 * 设置操作密码
-	 * @ApiAuthor [Mr.Zhang]
-	 * @ApiMethod (POST)
-	 * @ApiParams   (name="operation_pwd", type="string", required=true, description="操作密码")
-	 * @ApiParams   (name="re_operation_pwd", type="string", required=true, description="重复操作密码")
-	 * @ApiRoute  (/api/member.member/setOperationPwd)
-	 */
-	public function setOperationPwd()
-	{
-		$operation_pwd        = $this->request->post('operation_pwd');
-		$re_operation_pwd = $this->request->post('re_operation_pwd');
-		if(strlen($operation_pwd) != 6 || strlen($re_operation_pwd) !=6){
-			$this->error('操作密码为6位纯数字');
-		}
-		if (!$operation_pwd || !$re_operation_pwd) {
-			$this->error('操作密码不能为空');
-		}
-		if ($operation_pwd !== $re_operation_pwd) {
-			$this->error("两次密码不一致");
-		}
-		$member_data = MemberModel::where('member_id', $this->auth->getMemberId())->find();
-		if (!$member_data) {
-			$this->error("当前用户不存在");
-		}
-		if($member_data['operation_pwd']){
-			$this->error("操作密码已经设置过了");
-		}
-		$member_data->operation_pwd = md5($operation_pwd);
-		if ($member_data->save()) {
-			$this->success("设置成功");
-		}
-		$this->error("设置失败");
-	}
+    /**
+     * 设置操作密码
+     * @ApiAuthor [Mr.Zhang]
+     * @ApiMethod (POST)
+     * @ApiParams   (name="operation_pwd", type="string", required=true, description="操作密码")
+     * @ApiParams   (name="re_operation_pwd", type="string", required=true, description="重复操作密码")
+     * @ApiRoute  (/api/member.member/setOperationPwd)
+     */
+    public function setOperationPwd()
+    {
+        $operation_pwd        = $this->request->post('operation_pwd');
+        $re_operation_pwd = $this->request->post('re_operation_pwd');
+        if(strlen($operation_pwd) != 6 || strlen($re_operation_pwd) !=6){
+            $this->error('操作密码为6位纯数字');
+        }
+        if (!$operation_pwd || !$re_operation_pwd) {
+            $this->error('操作密码不能为空');
+        }
+        if ($operation_pwd !== $re_operation_pwd) {
+            $this->error("两次密码不一致");
+        }
+        $member_data = MemberModel::where('member_id', $this->auth->member_id)->find();
+        if (!$member_data) {
+            $this->error("当前用户不存在");
+        }
+        if($member_data['operation_pwd']){
+            $this->error("操作密码已经设置过了");
+        }
+        $member_salt   = self::getMemberSalt((int)$this->auth->member_id);
+        $operation_pwd = self::encryptPassword($operation_pwd, $member_salt);
+        //重新设定操作密码
+        $member_data->operation_pwd = $operation_pwd;
+        if ($member_data->save()) {
+            $this->success("设置成功");
+        }
+        $this->error("设置失败");
+    }
 
 
 	/**
@@ -451,6 +454,38 @@ class Member extends Controller
 		return $this->success('修改成功');
 	}
 
+    /**
+     * 实名认证纠错
+     * @ApiAuthor [Mr.Wei]
+     * @ApiMethod (POST)
+     * @ApiRoute  (/api/member.member/realAbc)
+     */
+    public function realAbc(){
+        $member_list = (new MemberReal())->select();
+        $card = new CheckCard();
+        foreach ($member_list as $k => $v){
+            $param['card'] = '15212220000223122X';
+            $param['phone'] = '15049500117';
+            $param['name'] = '赵蒙';
+//            $param['card'] = $v->card;
+//            $param['phone'] = $v->phone;
+//            $param['name'] = $v->name;
+            $result = $card->threeElementsDemo($param);
+            echo "<pre/>";
+            print_r($result);die;
+            if($result == 1){
+                $v->result_status = 1;
+                $v->result_msg = '成功';
+            }else{
+                $v->result_status = 0;
+                $v->result_msg = $result;
+            }
+            $v->save();
+        }
+        echo "<pre/>";
+        print_r('完成2');die;
+    }
+
 	/**
 	 * 实名认证
 	 * @ApiAuthor [Mr.Zhang]
@@ -474,6 +509,26 @@ class Member extends Controller
 		if($member_info['real_status']['value'] == 2){
 			$this->error('已经实名认证过了');
 		}
+		
+		$length = strlen($param['card']);
+        if($id_num = '' || !in_array($length,[15,18])){
+            $this->error('身份证输入错误');
+        }
+        $rule15 = "/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/";
+        $rule18 = "/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$/";
+        // if($length === 15){
+        //     $match_result = preg_match($rule15,$id_num);
+        //     if(!$match_result){
+        //         $this->error('身份证输入错误');
+        //     }
+        // }
+        // if($length === 18){
+        //     $match_result = preg_match($rule18,$id_num);
+        //     if(!$match_result){
+        //         $this->error('身份证输入错误');
+        //     }
+        // }
+		
 //		判断输入的身份证号码是否已经使用过
 		$MemberCard = MemberReal::getDetails(['card'=>$param['card']]);
 		if (!empty($MemberCard)) {

@@ -153,7 +153,7 @@ class Auth
             'p_id'        => $p_id,
         ];
         $params             = array_merge($data, [
-            'name'  => "藏家_" . getNicknameGuidV4(),
+            'name'  => "道友_" . getNicknameGuidV4(),
             'logintime' => $time,
             'loginip'   => $ip,
             'prevtime'  => $time,

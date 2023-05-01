@@ -66,6 +66,12 @@ class Goods extends GoodsModel
         if (!empty($param['product_types'])) {
             $where['product_types'] = $param['product_types'];
         }
+
+        //weijian 如果是平台藏品，把盲盒和平台绑在一起
+        if ($where['product_types'] == 1) {
+            $where['product_types'] = ['in',['1','5']];
+        }
+
         // 创建时间
         if (!empty($param['create_name'])) {
             $create_name          = explode('~', $param['create_name']);
