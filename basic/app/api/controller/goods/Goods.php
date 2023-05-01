@@ -109,7 +109,7 @@ class Goods extends Controller
         if(!$page){
             $this->error('参数错误');
         }
-        $goods_list = (new GoodsModel())->where(['is_recommend'=>10])->page($page,10)->field("goods_id,goods_name,goods_thumb")->select();
+        $goods_list = (new GoodsModel())->where(['is_recommend'=>10,'goods_status'=>10,'is_del'=>0])->page($page,10)->field("goods_id,goods_name,goods_thumb")->select();
         $memberGoods = new MemberGoods();
         foreach ($goods_list as $key => $value){
             $member_goods_info = $memberGoods->where(['goods_id'=>$value['goods_id'],'goods_status'=>['in',['1','2']],'is_synthesis'=>0,'is_donation'=>0])->field("sale_price")->order("sale_price asc")->find();

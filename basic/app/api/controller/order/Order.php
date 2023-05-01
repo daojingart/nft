@@ -65,32 +65,30 @@ class Order extends Controller
         } else {
             $lockKey = "createOrder:$order_type:$goods_id";
         }
-        $member_lock_key = "member_lock_member_id:".$this->auth->member_id;
-        $order_values = Setting::getItem("order");
-        $order_lock_number = isset($order_values['order_lock_number'])? (int)$order_values['order_lock_number'] :3;
-        $order_lock_time = $order_values['order_lock_time'] ?? 2;
-        if($this->redis->get($member_lock_key)>= $order_lock_number){
-            $this->error("1个小时内连续{$order_lock_number}次取消订单，限制交易{$order_lock_time}小时");
-        }
-        //判断是否开启可以连续下单开启后则连续下单 否则只能下单一次
-        if(isset($order_values['create_order_open']) && $order_values['create_order_open']==20){
-            $order_count = OrderModel::where('member_id',$this->auth->member_id)->where('order_status',1)->where('pay_status',1)->count();
-            if($order_count>0){
-                $this->error('您有未支付订单，请先支付后购买!');
-            }
-        }
-
-
         if (RedisUtils::lock($lockKey, 60)) {
             $this->error('商品购买火爆,请重试');
         }
         $orderValidate = new OrderValidate();
-        if(!$orderValidate->validationCreateOrder($this->request->post(),$lockKey,$this->auth->member_id)){
+        if(!$orderValidate->validationCreateOrder($this->request->post(),$lockKey,$this->auth->getUser())){
             RedisUtils::unlock($lockKey);
             $this->error($orderValidate->getError());
         }
         $model = new OrderModel();
         if ($order_type != 5) { //藏品兑换
+			$member_lock_key = "member_lock_member_id:".$this->auth->member_id;
+			$order_values = Setting::getItem("order");
+			$order_lock_number = isset($order_values['order_lock_number'])? (int)$order_values['order_lock_number'] :3;
+			$order_lock_time = $order_values['order_lock_time'] ?? 2;
+			if($this->redis->get($member_lock_key)>= $order_lock_number){
+				$this->error("1个小时内连续{$order_lock_number}次取消订单，限制交易{$order_lock_time}小时");
+			}
+			//判断是否开启可以连续下单开启后则连续下单 否则只能下单一次
+			if(isset($order_values['create_order_open']) && $order_values['create_order_open']==20){
+				$order_count = OrderModel::where('member_id',$this->auth->member_id)->where('order_status',1)->where('pay_status',1)->count();
+				if($order_count>0){
+					$this->error('您有未支付订单，请先支付后购买!');
+				}
+			}
             $orderInfo = $model->where('member_id', $this->member_info['member_id'])
                 ->where(['pay_status' => 1, 'order_status' => 1, 'order_type' => $order_type])
                 ->find();
@@ -181,7 +179,7 @@ class Order extends Controller
         }
         if ($model['order_type'] == 5) {
             $res       = (new GloryGoods())->where(['goods_id' => $goodsInfo['goods_id']])->find();
-            $order_key = "order_id_" . $goodsInfo['goods_id'] . "_member_id_" . $model['member_id'];
+            $order_key = "order_score_id_" . $goodsInfo['goods_id'] . "_member_id_" . $model['member_id'];
             if ($this->redis->get($order_key) >= $res['limit']) {
                  $this->error("下单失败！请您稍后再试");
             }
@@ -321,7 +319,7 @@ class Order extends Controller
                 if($result){
                     $this->success("支付成功",$result);
                 }
-                $this->error($balancePay->getError());
+                $this->error($integralPay->getError());
                 break;
             case "9": //连连余额支付
                 $order_sn = $lianlianPay->createRadecreate("GENERAL_CONSUME",$model['order_id'],$this->auth->member_id);

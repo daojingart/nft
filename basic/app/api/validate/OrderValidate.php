@@ -50,8 +50,9 @@ class OrderValidate extends BaseValidate
      * @Interface validationCreateOrder
      * @Time: 2022/10/28   09:52
      */
-    public function validationCreateOrder($param,$lockKey,$member_id)
+    public function validationCreateOrder($param,$lockKey,$member_info)
     {
+		$member_id = $member_info['member_id'];
         $ip = request()->ip();
         switch ($param['order_type'])
         {
@@ -192,12 +193,20 @@ class OrderValidate extends BaseValidate
                     $this->order_error = "人机验证失败!";
                     return false;
                 }
+
                 //查询这个藏品是否在荣誉值兑换里面
                 $GloryGoods = (new GloryGoods())->where(['goods_id'=>$param['goods_id']])->find();
                 if(empty($GloryGoods)){
                     $this->order_error = "兑换藏品不存在,无法进行兑换!";
                     return false;
                 }
+
+				//判断当前用户荣誉值是否充足 充足才可以兑换
+				if ($GloryGoods['price'] > $member_info['glory']) {
+					$this->order_error = "荣誉值不足,无法兑换!";
+					return false;
+				}
+
                 //查询藏品是否存在
                 $goods_info = Goods::detail($param['goods_id']);
                 if (empty($goods_info) || $goods_info['is_del']==1) {
@@ -217,7 +226,7 @@ class OrderValidate extends BaseValidate
                     $this->order_error = "库存不足,无法购买!!!";
                     return false;
                 }
-                if($GloryGoods['type']==1 && in_array($goods_info['product_types'], [1,5])){
+                if($GloryGoods['type']==1 && !in_array($goods_info['product_types'], [1,5])){
                     $this->order_error = "请修改参数,类型错误";
                     return false;
                 }

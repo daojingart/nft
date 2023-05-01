@@ -18,6 +18,7 @@
                             <div class="widget-head am-cf">
                                 <div class="widget-title am-fl">添加帮助</div>
                             </div>
+                            <input type="hidden" class="tpl-form-input" name="notice[category_id]" value="0">
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-u-lg-2 am-form-label form-require">
                                     帮助标题

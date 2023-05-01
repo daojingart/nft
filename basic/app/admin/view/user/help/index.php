@@ -13,7 +13,7 @@
 <div class="layui-card">
     <ul class="layui-tab-title store_system">
         <li class="layui-this"><a href="{{:url('user.help/index')}}">帮助列表</a></li>
-        <li><a href="{{:url('user.help/categoryIndex')}}" >帮助分类</a></li>
+<!--        <li><a href="{{:url('user.help/categoryIndex')}}" >帮助分类</a></li>-->
     </ul>
     <div class="layui-card-body" >
         <div class="layui-row layui-col-space12">
@@ -100,11 +100,11 @@
                     field: 'title',
                     align: 'center',
                 },
-                {
-                    title: '分类名',
-                    field: 'category_title',
-                    align: 'center',
-                },
+                // {
+                //     title: '分类名',
+                //     field: 'category_title',
+                //     align: 'center',
+                // },
 
                 {
                     title: '创建时间',

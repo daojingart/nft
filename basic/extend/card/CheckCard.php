@@ -143,8 +143,9 @@ class CheckCard
 		}
 		return true;
 	}
-
-    public function threeElementsDemo($param)
+	
+	
+	public function threeElementsDemo($param)
     {
         // 云市场分配的密钥Id
         $secretId = $this->config['qf_AppKey'];
@@ -208,7 +209,7 @@ class CheckCard
         if(isset($content_array['error_code']) && $content_array['error_code']=='0' && $content_array['result']['VerificationResult'] == '0'){
             return "运营商系统中无记录,请您检查输入信息是否为本人信息";
         }
-        return 1;
+        return '成功';
     }
 
 
