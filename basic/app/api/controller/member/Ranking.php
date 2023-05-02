@@ -92,6 +92,23 @@ class Ranking extends Controller
     }
 
     /**
+     * 根据会员ID获得排行榜
+     * @ApiAuthor [Mr.Wei]
+     * @ApiMethod (POST)
+     * @ApiRoute  (/api/member.ranking/getLeaderboardsByMemberId)
+     * @ApiParams   (name="member_id", type="string", required=true, description="会员ID")
+     * @ApiReturnParams   (name="my_number", type="string", description="邀请人数")
+     * @ApiReturnParams   (name="name", type="name", description="昵称")
+     * @ApiReturnParams   (name="avatarUrl", type="string", description="头像")
+     * @ApiReturnParams   (name="code", type="string", description="邀请码")
+     * @ApiReturnParams   (name="index_number", type="string", description="当前排名")
+     */
+    public function getLeaderboardsByMemberId()
+    {
+
+    }
+
+    /**
      * 持仓排行榜
      * @ApiAuthor [Mr.Zhang]
      * @ApiMethod (POST)
