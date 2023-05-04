@@ -18,7 +18,9 @@ namespace app\api\controller\member;
 use app\common\controller\Controller;
 use app\common\model\Member as MemberModel;
 use app\common\model\MemberGoods;
+
 use think\Cache;
+use think\Db;
 
 /**
  * 排行榜
@@ -69,10 +71,30 @@ class Ranking extends Controller
      */
     public function getInviteLeaderboards()
     {
+//        $model = new memberModel();
+//        $member_list = $model->order("invitations_number desc")->limit(0,100)->field("name,avatarUrl,invitations_number,member_id")->select()->toArray();
+//        foreach ($member_list as $key=>$val){
+//            $member_list[$key]['invitations_number'] = float_number($val['invitations_number']);
+//        }
+//        $member_lists = array_column($member_list, 'member_id');
+//        $index = array_search($this->auth->member_id,$member_lists);
+//        if (is_int($index)){
+//            $index = $index+1;
+//        } else {
+//            $index = "暂无排名";
+//        }
+//        $this->success("ok",[
+//            'list' => $member_list,
+//            'index_number' => $index,
+//            'my_number' => $this->auth->invitations_number,
+//            'name' => $this->auth->name,
+//            'avatarUrl' => $this->auth->avatarUrl,
+//            'code' => $this->auth->code,
+//        ]);
         $model = new memberModel();
-        $member_list = $model->order("invitations_number desc")->limit(0,100)->field("name,avatarUrl,invitations_number,member_id")->select()->toArray();
+        $member_list = $model->order("invitations_num desc")->limit(0,100)->field("name,avatarUrl,invitations_num,member_id")->select()->toArray();
         foreach ($member_list as $key=>$val){
-            $member_list[$key]['invitations_number'] = float_number($val['invitations_number']);
+            $member_list[$key]['invitations_number'] = float_number($val['invitations_num']);
         }
         $member_lists = array_column($member_list, 'member_id');
         $index = array_search($this->auth->member_id,$member_lists);
@@ -84,7 +106,7 @@ class Ranking extends Controller
         $this->success("ok",[
             'list' => $member_list,
             'index_number' => $index,
-            'my_number' => $this->auth->invitations_number,
+            'my_number' => $this->auth->invitations_num,
             'name' => $this->auth->name,
             'avatarUrl' => $this->auth->avatarUrl,
             'code' => $this->auth->code,
@@ -97,15 +119,30 @@ class Ranking extends Controller
      * @ApiMethod (POST)
      * @ApiRoute  (/api/member.ranking/getLeaderboardsByMemberId)
      * @ApiParams   (name="member_id", type="string", required=true, description="会员ID")
-     * @ApiReturnParams   (name="my_number", type="string", description="邀请人数")
-     * @ApiReturnParams   (name="name", type="name", description="昵称")
-     * @ApiReturnParams   (name="avatarUrl", type="string", description="头像")
-     * @ApiReturnParams   (name="code", type="string", description="邀请码")
-     * @ApiReturnParams   (name="index_number", type="string", description="当前排名")
      */
     public function getLeaderboardsByMemberId()
     {
-
+        //$member_id = $this->request->post('member_id');
+        $member_id = $this->auth->member_id;
+        $sql = "select member_id,create_time,real_status from snake_member where p_id = {$member_id}";
+        $result = Db::query($sql);
+        foreach($result as $key => &$value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $pay_sql = "select member_id from snake_order where member_id = ".$value['member_id']." and order_type = 2";
+            $pay_result = Db::query($pay_sql);
+            if($value['real_status'] == 2){
+                $value['bool_real'] = 1;
+            }else{
+                $value['bool_real'] = 0;
+            }
+            $value['bool_buy'] = 0;
+            if(count($pay_result)){
+                $value['bool_buy'] = 1;
+            }
+        }
+        $this->success("ok",[
+            'list' => $result,
+        ]);
     }
 
     /**

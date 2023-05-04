@@ -600,6 +600,35 @@ class Member extends Controller
 			}
 			(new Task())->createAccount($member_info['member_id']);
             Common::givePrizeCount($member_info['member_id']);
+
+            if($member_info['p_id'] != 0){
+                (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc("invitations_num",1);
+                $invitations_num = (new MemberModel())->where(['member_id'=>$member_info['p_id']])->value('invitations_num');
+                if($invitations_num == 3){
+                    //增加2个限购次数
+                    (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',2);
+                }elseif ($invitations_num == 5){
+                    //增加3个限购次数
+                    (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',3);
+                }elseif ($invitations_num == 10){
+                    //增加5个限购次数
+                    (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',5);
+                }elseif ($invitations_num == 30){
+                    //增加20个限购次数
+                    (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',20);
+                }elseif ($invitations_num == 50){
+                    //增加30个限购次数
+                    (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',30);
+                }elseif ($invitations_num == 100){
+                    //增加50个限购次数
+                    (new MemberModel())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',50);
+                }
+            }
+
+
+
+
+
 			$this->success('实名成功');
 		}else{
 			$this->success('提交成功~等待平台审核！');

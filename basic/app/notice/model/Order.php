@@ -243,26 +243,26 @@ class Order extends OrderModel
         if($member_info['p_id']>0 && isset($values['additional_open']) && $values['additional_open']==10){
             //邀请人数+1
             (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_sum',1);
-            $purchase_sum = (new Member())->where(['member_id'=>$member_info['p_id']])->value('purchase_sum');
-            if($purchase_sum == 3){
-                //增加2个限购次数
-                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',2);
-            }elseif ($purchase_sum == 5){
-                //增加3个限购次数
-                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',3);
-            }elseif ($purchase_sum == 10){
-                //增加5个限购次数
-                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',5);
-            }elseif ($purchase_sum == 30){
-                //增加20个限购次数
-                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',20);
-            }elseif ($purchase_sum == 50){
-                //增加30个限购次数
-                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',30);
-            }elseif ($purchase_sum == 100){
-                //增加50个限购次数
-                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',50);
-            }
+//            $purchase_sum = (new Member())->where(['member_id'=>$member_info['p_id']])->value('purchase_sum');
+//            if($purchase_sum == 3){
+//                //增加2个限购次数
+//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',2);
+//            }elseif ($purchase_sum == 5){
+//                //增加3个限购次数
+//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',3);
+//            }elseif ($purchase_sum == 10){
+//                //增加5个限购次数
+//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',5);
+//            }elseif ($purchase_sum == 30){
+//                //增加20个限购次数
+//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',20);
+//            }elseif ($purchase_sum == 50){
+//                //增加30个限购次数
+//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',30);
+//            }elseif ($purchase_sum == 100){
+//                //增加50个限购次数
+//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',50);
+//            }
         }
     }
 
