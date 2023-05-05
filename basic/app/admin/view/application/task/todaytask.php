@@ -47,8 +47,23 @@
                                 </div>
                             </div>
 
-
-
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl">排行榜公告</div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">排行榜公告名称 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="text" class="tpl-form-input" name="todaytask[notice_name]"
+                                           value="{{$values.notice_name ?? ''}}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">排行榜公告地址 </label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <input type="text" class="tpl-form-input" name="todaytask[notice_address]"
+                                           value="{{$values.notice_address ?? ''}}">
+                                </div>
+                            </div>
 
 
 

@@ -18,7 +18,7 @@ namespace app\api\controller\member;
 use app\common\controller\Controller;
 use app\common\model\Member as MemberModel;
 use app\common\model\MemberGoods;
-
+use app\admin\model\Setting as SettingModel;
 use think\Cache;
 use think\Db;
 
@@ -103,13 +103,29 @@ class Ranking extends Controller
         } else {
             $index = "暂无排名";
         }
+
+        $values_setting = SettingModel::getItem("todaytask");
+        $notice_name = "";
+        $notice_address = "";
+        if(isset($values_setting['notice_name'])){
+            $notice_name = $values_setting['notice_name'];
+        }
+        if(isset($values_setting['notice_address'])){
+            $notice_address = $values_setting['notice_address'];
+        }
+
+        $mynum_sql = 'select * from snake_member where real_status = 2 and p_id = '.$this->auth->member_id;
+        $result = Db::query($mynum_sql);
+
         $this->success("ok",[
             'list' => $member_list,
             'index_number' => $index,
-            'my_number' => $this->auth->invitations_num,
+            'my_number' => count($result),
             'name' => $this->auth->name,
             'avatarUrl' => $this->auth->avatarUrl,
             'code' => $this->auth->code,
+            'notice_name' => $notice_name,
+            'notice_address' => $notice_address
         ]);
     }
 
@@ -128,7 +144,7 @@ class Ranking extends Controller
         $result = Db::query($sql);
         foreach($result as $key => &$value){
             $value['create_time'] = date('Y-m-d',$value['create_time']);
-            $pay_sql = "select member_id from snake_order where member_id = ".$value['member_id']." and order_type = 2";
+            $pay_sql = "select member_id from snake_order where member_id = ".$value['member_id']." and order_type = 2 and pay_status = 2 and order_status = 2";
             $pay_result = Db::query($pay_sql);
             if($value['real_status'] == 2){
                 $value['bool_real'] = 1;

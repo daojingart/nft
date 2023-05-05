@@ -37,6 +37,7 @@ use card\CheckCard;
 use exception\BaseException;
 use think\Cache;
 use think\Env;
+use think\Db;
 
 /**
  * 会员接口
@@ -461,29 +462,41 @@ class Member extends Controller
      * @ApiRoute  (/api/member.member/realAbc)
      */
     public function realAbc(){
-        $member_list = (new MemberReal())->select();
-        $card = new CheckCard();
-        foreach ($member_list as $k => $v){
-            $param['card'] = '15212220000223122X';
-            $param['phone'] = '15049500117';
-            $param['name'] = '赵蒙';
-//            $param['card'] = $v->card;
-//            $param['phone'] = $v->phone;
-//            $param['name'] = $v->name;
-            $result = $card->threeElementsDemo($param);
-            echo "<pre/>";
-            print_r($result);die;
-            if($result == 1){
-                $v->result_status = 1;
-                $v->result_msg = '成功';
-            }else{
-                $v->result_status = 0;
-                $v->result_msg = $result;
+        $sql = "select p_id,count(member_id) as num from snake_member where p_id > 0 and real_status = 2 GROUP BY p_id ";
+        $result = Db::query($sql);
+
+        foreach ($result as $key => $value){
+            $member_info = (new MemberModel())->where(['member_id'=>$value['p_id']])->find();
+            if($member_info){
+                $member_info['invitations_num'] = $value['num'];
+                $member_info->save();
             }
-            $v->save();
         }
-        echo "<pre/>";
-        print_r('完成2');die;
+        echo '完成1';die;
+
+//        $member_list = (new MemberReal())->select();
+//        $card = new CheckCard();
+//        foreach ($member_list as $k => $v){
+//            $param['card'] = '15212220000223122X';
+//            $param['phone'] = '15049500117';
+//            $param['name'] = '赵蒙';
+////            $param['card'] = $v->card;
+////            $param['phone'] = $v->phone;
+////            $param['name'] = $v->name;
+//            $result = $card->threeElementsDemo($param);
+//            echo "<pre/>";
+//            print_r($result);die;
+//            if($result == 1){
+//                $v->result_status = 1;
+//                $v->result_msg = '成功';
+//            }else{
+//                $v->result_status = 0;
+//                $v->result_msg = $result;
+//            }
+//            $v->save();
+//        }
+//        echo "<pre/>";
+//        print_r('完成2');die;
     }
 
 	/**
