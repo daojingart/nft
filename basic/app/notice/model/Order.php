@@ -30,6 +30,7 @@ use think\Queue;
 use think\Db;
 use Exception;
 use think\db\Query;
+use app\common\model\Glory;
 
 class Order extends OrderModel
 {
@@ -243,26 +244,67 @@ class Order extends OrderModel
         if($member_info['p_id']>0 && isset($values['additional_open']) && $values['additional_open']==10){
             //邀请人数+1
             (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_sum',1);
-//            $purchase_sum = (new Member())->where(['member_id'=>$member_info['p_id']])->value('purchase_sum');
-//            if($purchase_sum == 3){
-//                //增加2个限购次数
-//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',2);
-//            }elseif ($purchase_sum == 5){
-//                //增加3个限购次数
-//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',3);
-//            }elseif ($purchase_sum == 10){
-//                //增加5个限购次数
-//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',5);
-//            }elseif ($purchase_sum == 30){
-//                //增加20个限购次数
-//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',20);
-//            }elseif ($purchase_sum == 50){
-//                //增加30个限购次数
-//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',30);
-//            }elseif ($purchase_sum == 100){
-//                //增加50个限购次数
-//                (new Member())->where(['member_id'=>$member_info['p_id']])->setInc('purchase_limit',50);
-//            }
+            $purchase_sum = (new Member())->where(['member_id'=>$member_info['p_id']])->value('purchase_sum');
+            if($purchase_sum == 3){
+                //增加200荣誉值
+                $integralData = [
+                    'member_id' => $member_info['p_id'],
+                    'type' => 1,
+                    'amount' => 200,
+                    'remark' => '完成洗髓丹*2任务奖励'
+                ];
+                (new Glory())->allowField(true)->save($integralData);
+            }elseif ($purchase_sum == 5){
+                //增加300荣誉值
+                $integralData = [
+                    'member_id' => $member_info['p_id'],
+                    'type' => 1,
+                    'amount' => 300,
+                    'remark' => '完成洗髓丹*3任务奖励'
+                ];
+                (new Glory())->allowField(true)->save($integralData);
+                //(new Member())->where(['member_id'=>$member_info['p_id']])->setInc('glory',300);
+            }elseif ($purchase_sum == 10){
+                //增加3000荣誉值
+                $integralData = [
+                    'member_id' => $member_info['p_id'],
+                    'type' => 1,
+                    'amount' => 3000,
+                    'remark' => '完成申公豹*1＋灵电黑豹*1任务奖励'
+                ];
+                (new Glory())->allowField(true)->save($integralData);
+                //(new Member())->where(['member_id'=>$member_info['p_id']])->setInc('glory',3000);
+            }elseif ($purchase_sum == 30){
+                //增加3000荣誉值
+                $integralData = [
+                    'member_id' => $member_info['p_id'],
+                    'type' => 1,
+                    'amount' => 3000,
+                    'remark' => '完成妲己*1＋叱风犬*1奖励'
+                ];
+                (new Glory())->allowField(true)->save($integralData);
+                //(new Member())->where(['member_id'=>$member_info['p_id']])->setInc('glory',3000);
+            }elseif ($purchase_sum == 50){
+                //增加4000荣誉值
+                $integralData = [
+                    'member_id' => $member_info['p_id'],
+                    'type' => 1,
+                    'amount' => 4000,
+                    'remark' => '完成灵狐*1＋金眼神鹰*1奖励'
+                ];
+                (new Glory())->allowField(true)->save($integralData);
+                //(new Member())->where(['member_id'=>$member_info['p_id']])->setInc('glory',4000);
+            }elseif ($purchase_sum == 100){
+                //增加20000
+                $integralData = [
+                    'member_id' => $member_info['p_id'],
+                    'type' => 1,
+                    'amount' => 20000,
+                    'remark' => '完成纣王*1 + 四只神兽一套*1奖励'
+                ];
+                (new Glory())->allowField(true)->save($integralData);
+                //(new Member())->where(['member_id'=>$member_info['p_id']])->setInc('glory',20000);
+            }
         }
     }
 

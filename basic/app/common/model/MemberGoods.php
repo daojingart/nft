@@ -187,7 +187,7 @@ class MemberGoods extends BaseModel
 			}
 		}
 		//获取当前商品的最高寄售金额
-		$goods_list = $this->field('goods_id,goods_name,goods_thumb,writer_name')
+		$goods_list = $this->field('goods_id,goods_name,goods_thumb,writer_name,member_id')
 					->whereIn("id",$in_goods_id)
 					->order($order)
 					->paginate($param['listRows'],false,[
@@ -290,7 +290,7 @@ class MemberGoods extends BaseModel
             $where['goods_status'] = ['in',['0','1','2']];
             $where['is_synthesis'] = 0;
             $where['is_donation'] = 0;
-            return  $this->where($where)->order("collection_number asc")->field("id,goods_name,goods_thumb,create_time,cast_status,sale_status,goods_status,collection_number,goods_price")->page($params['page'],10)->select()->toArray();
+            return  $this->where($where)->order("collection_number asc")->field("id,goods_name,goods_thumb,create_time,cast_status,sale_status,goods_status,collection_number,goods_price,sale_price")->page($params['page'],10)->select()->toArray();
         }
     }
 

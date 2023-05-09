@@ -276,6 +276,9 @@ class Marketgoods extends Controller
             'is_box_show' => $is_show,
             'circulate_number' => $circulate_number
         ];
+        if(isset($detail['id'])){
+            $info['member_id'] = $detail['member_id'];
+        }
         $this->success('ok',$info);
     }
 

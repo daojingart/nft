@@ -163,15 +163,15 @@ class Member extends BaseService
         }
         foreach ($data as $key => $val) {
             $member_info = (new MemberModel())->where(['phone' => $val['phone']])->field("member_id,phone,real_status")->find();
-            if (!empty($member_info) && $member_info['real_status']['value'] == 2) {
+            //if (!empty($member_info) && $member_info['real_status']['value'] == 2) {
                 //增加一个for 循环体
                 $number = empty($val['number'])?1:$val['number'];
                 for ($i = 1; $i <= $number; $i++) {
                     self::drop($val['goods_id'], $member_info['member_id']);
                 }
-            }else{
-                throw new BaseException(['msg' => '手机号为'.$val['phone'].'的用户不存在或未实名认证-当前用户前面的用户空投成功后面空投失败']);
-            }
+//            }else{
+//                throw new BaseException(['msg' => '手机号为'.$val['phone'].'的用户不存在或未实名认证-当前用户前面的用户空投成功后面空投失败']);
+//            }
         }
         return true;
     }
@@ -213,12 +213,12 @@ class Member extends BaseService
         StockUtils::deductStock($goods_id, 1);
         $member_data = MemberModel::where('member_id', $member_id)->find();
         $goods_data = Goods::with('writer')->where('goods_id', $goods_id)->find();
-        if ($member_data['real_status']['value'] == 2) {
+        //if ($member_data['real_status']['value'] == 2) {
             $data = [
                 'member_data' => $member_data,
                 'goods_data' => $goods_data,
             ];
             Queue::push(SendAirJob::class, $data,'sendair');
-        }
+        //}
     }
 }

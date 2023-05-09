@@ -110,7 +110,7 @@
             });
         }
         window.copy = function(obj) {
-            $link_url = '/pagesA/index/gonggao_detail?id='+obj.data['id'];
+            $link_url = '/pagesA/index/realDet?id='+obj.data['id'];
             layer.alert($link_url,{title:'站内链接地址'});
         }
     })

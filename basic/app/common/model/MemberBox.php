@@ -146,7 +146,7 @@ class MemberBox extends BaseModel
                     break;
             }
         }
-        $query->field('id,goods_id,goods_name,goods_thumb,sale_price as goods_price,create_time,box_status');
+        $query->field('id,goods_id,goods_name,goods_thumb,sale_price as goods_price,create_time,box_status,member_id');
         $list = $query->paginate($param['listRows'],false,[
             'query' => Request::instance()->request()
         ]);

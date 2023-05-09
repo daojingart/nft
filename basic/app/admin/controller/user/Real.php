@@ -84,7 +84,7 @@ class Real extends Controller
             ///注册成功赠送荣誉值
             $member_info = (new Member())->where(['member_id'=>$id])->find();
             if($member_info['p_id']){
-                (new AwardSetting())->getTaskList($member_info['p_id']);
+                //(new AwardSetting())->getTaskList($member_info['p_id']);
                 if(isset($value['condition_task']) && $value['condition_task']==2){
                     (new Member())->where(['member_id'=>$member_info['p_id']])->setInc("invitations_number",1);
                 }
@@ -143,9 +143,9 @@ class Real extends Controller
                         (new Glory())->allowField(true)->save($integralData);
                         ///注册成功赠送荣誉值
                         $member_info = (new Member())->where(['member_id'=>$member_rel['member_id']])->find();
-                        if($member_info['p_id']){
-                            (new AwardSetting())->getTaskList($member_info['p_id']);
-                        }
+//                        if($member_info['p_id']){
+//                            (new AwardSetting())->getTaskList($member_info['p_id']);
+//                        }
                     }
                 }
             }

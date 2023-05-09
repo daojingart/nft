@@ -77,6 +77,12 @@ class Box extends MemberBox
             }else{
                 $item['pay_name'] = '--';
             }
+            $order_lock = (new Order())->where(['sale_goods_id'=>$item['id'],'order_status'=>1])->find();
+            if($order_lock){
+                $item['bool_lock'] = 1;
+            }else{
+                $item['bool_lock'] = 0;
+            }
         });
         return $list;
     }

@@ -118,6 +118,9 @@ class Box extends Controller
      */
     public function submitSaleBox()
     {
+        if($this->auth->member_id != 2){
+            $this->error("敬请期待");
+        }
         $id = $this->request->post("box_id");
         $sale_price = $this->request->post("sale_price");
         $operation_pwd = $this->request->post("operation_pwd");

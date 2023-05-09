@@ -602,10 +602,10 @@ class Member extends Controller
 			//判断是否关闭 积分奖励 关闭后则不再奖励积分
 			$values = Setting::getItem("collection");
 			if($values['repo'] == 10){
-				(new AwardSetting())->realtask($member_info['member_id']);
-				if ($member_info['p_id'] != 0) {
-					(new AwardSetting())->getTaskList($member_info['p_id']);
-				}
+//				(new AwardSetting())->realtask($member_info['member_id']);
+//				if ($member_info['p_id'] != 0) {
+//					(new AwardSetting())->getTaskList($member_info['p_id']);
+//				}
 			}
 			$value = Setting::getItem("todaytask");
 			if ($member_info['p_id'] != 0 && isset($value['condition_task']) && $value['condition_task']==2) {
@@ -699,6 +699,7 @@ class Member extends Controller
 		}
 
 		$this->success('ok',[
+		    'id' => $user['member_id'],
 			'name' => $user['name'],
 			'phone' => $user['phone'],
 			're_phone' => phone_substr_replace($user['phone']),

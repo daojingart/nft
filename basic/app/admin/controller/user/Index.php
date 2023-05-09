@@ -440,6 +440,10 @@ class Index extends Controller
     public function importAirdrop()
     {
         $data = json_decode(html_entity_decode($this->request->param()['data']), true);
+
+//        echo "<pre/>";
+//        print_r($data);die;
+
         if (empty($data)) {
             return $this->renderError('导入失败');
         }

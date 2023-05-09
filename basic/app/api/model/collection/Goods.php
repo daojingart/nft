@@ -105,7 +105,7 @@ class Goods extends GoodsModel
             }
         }
         $query->where('is_del', 0)
-            ->field('goods_id,goods_name,recovery_price as goods_price,goods_thumb,recovery_num as stock_num,create_time');
+            ->field('goods_id,goods_name,recovery_price as goods_price,goods_thumb,recovery_num as stock_num,create_time,member_id');
         $list = $query->paginate($param['listRows'], false, [
             'query' => Request::instance()->request(),
         ]);
